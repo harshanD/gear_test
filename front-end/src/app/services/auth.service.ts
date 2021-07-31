@@ -19,10 +19,11 @@ export class AuthService {
     private http: HttpClient
   ) {
     this.options = {
-      headers: new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders({Accept: 'application/json'})
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+        .set('Access-Control-Allow-Methods', 'GET, POST')
     };
   }
 
@@ -38,7 +39,7 @@ export class AuthService {
       client_secret: 'zm8fjOUNu65aQePXhcAxCNHe1l1Mxg2WxZM4ktX2',
       username: e,
       password: p,
-      scope: ''
+      scope: '',
     }, this.options);
   }
 

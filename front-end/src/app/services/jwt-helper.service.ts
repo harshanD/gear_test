@@ -64,4 +64,18 @@ export class JwtHelperService {
   email(): string {
     return this.attr('email') as string;
   }
+
+  /**
+   * Get authenticated user's role
+   */
+  roleList(): string {
+    return this.attr('rolesList') as string;
+  }
+
+  /**
+   * Get authenticated user's role
+   */
+  rolesData(): string {
+    return this.attr('roleData') as string;
+  }
 }

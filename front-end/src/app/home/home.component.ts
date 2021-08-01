@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {JwtHelperService} from "../services/jwt-helper.service";
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   accessToken: any;
   accessTokenDetails: any;
   loading: boolean;
+
   constructor(
     jwtHelper: JwtHelperService,
     private authService: AuthService,
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit {
     this.accessTokenDetails = {
       id: jwtHelper.id(),
       name: jwtHelper.name(),
-      email: jwtHelper.email()
+      email: jwtHelper.email(),
+      roleList: jwtHelper.roleList(),
+      rolesData: jwtHelper.rolesData()
     };
   }
 

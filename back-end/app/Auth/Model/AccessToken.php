@@ -27,7 +27,9 @@ class AccessToken extends PassportAccessToken
             ->withClaim('scopes', [])
             ->withClaim('id', $user->id)
             ->withClaim('name', $user->name)
-            ->withClaim('email', $user->email);
+            ->withClaim('email', $user->email)
+            ->withClaim('rolesList', $user->getRoleNames())
+            ->withClaim('roleData', $user->roles);
         return $builder
             ->getToken(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()));
     }
@@ -39,7 +41,7 @@ class AccessToken extends PassportAccessToken
 
     public function __toString()
     {
-        return (string) $this->convertToJWT($this->privateKey);
+        return (string)$this->convertToJWT($this->privateKey);
     }
 
 }

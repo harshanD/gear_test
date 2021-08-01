@@ -18,17 +18,22 @@
               <div class="col">
                 <div class="form-group">
                   <label for="email">Email address</label>
-                  <input type="email" id="email" formControlName="email" class="form-control" />
+                  <input type="email" id="email" formControlName="email" class="form-control"/>
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" id="password" formControlName="password" class="form-control" />
+                  <input type="password" id="password" formControlName="password" class="form-control"/>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col d-flex flex-row justify-content-center align-content-center">
                 <button type="submit" class="btn btn-dark col-12" [disabled]="loading">Login</button>
+              </div>
+              <div class="col d-flex flex-row justify-content-center align-content-center">
+                <button type="button" class="btn btn-dark col-12" (click)="router.navigate(['/signup']);"
+                        [disabled]="loading">Signup
+                </button>
               </div>
             </div>
           </form>

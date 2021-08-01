@@ -10,6 +10,7 @@ export class AuthService {
   authUrl = 'http://localhost:8000/oauth/token';
   apiUrl = 'http://localhost:8000/api';
   options: any;
+  loggedOptions: any;
 
   /**
    * Constructor
@@ -42,15 +43,36 @@ export class AuthService {
   }
 
   /**
-   * Revoke the authenticated user token
+   * Get an access token
+   * @param e The email address
+   * @param p The password string
    */
-  logout() {
-    this.options = {
+  signup(x: string, e: string, p: string) {
+    this.loggedOptions = {
       headers: new HttpHeaders({Accept: 'application/json'})
         .set('Content-Type', 'application/json')
         .set('Access-Control-Allow-Origin', '*')
         .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
     }
-    return this.http.get(this.apiUrl + '/token/revoke', this.options);
+
+    return this.http.post(this.apiUrl + '/signup', {
+      name: x,
+      email: e,
+      password: p,
+      roles: 'Author',
+    }, this.loggedOptions);
+  }
+
+  /**
+   * Revoke the authenticated user token
+   */
+  logout() {
+    this.loggedOptions = {
+      headers: new HttpHeaders({Accept: 'application/json'})
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    }
+    return this.http.get(this.apiUrl + '/token/revoke', this.loggedOptions);
   }
 }

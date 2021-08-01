@@ -5,7 +5,7 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class CreateAdminUserSeeder extends Seeder
+class CreateAuthorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,14 @@ class CreateAdminUserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Gears Admin',
-            'email' => 'gears@email.com',
+            'name' => 'Gears Author',
+            'email' => 'author@email.com',
             'password' => bcrypt('1234')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'Author']);
 
-        $permissions = Permission::pluck('id','id')->all();
+        $permissions = Permission::whereIn('name', array('books-list', 'books-create', 'books-edit', 'books-delete'))->pluck('id', 'id');
 
         $role->syncPermissions($permissions);
 

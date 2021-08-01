@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use http\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -50,7 +51,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+//            'password' => 'required|same:confirm-password',
+            'password' => 'required',
             'roles' => 'required'
         ]);
 
@@ -63,8 +65,27 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
 
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+        // And created user until here.
+
+        $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+        // Is this $request the same request? I mean Request $request? Then wouldn't it mess the other $request stuff? Also how did you pass it on the $request in $proxy? Wouldn't Request::create() just create a new thing?
+
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $request['email'],
+            'password' => $request['password'],
+            'scope' => null,
+        ]);
+
+        // Fire off the internal request.
+        $token = Request::create(
+            'oauth/token',
+            'POST'
+        );
+        return \Route::dispatch($token);
     }
 
 

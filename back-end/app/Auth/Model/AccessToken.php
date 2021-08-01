@@ -29,7 +29,8 @@ class AccessToken extends PassportAccessToken
             ->withClaim('name', $user->name)
             ->withClaim('email', $user->email)
             ->withClaim('rolesList', $user->getRoleNames())
-            ->withClaim('roleData', $user->roles);
+            ->withClaim('roleData', $user->load('roles.permissions'));
+//        ->withClaim('roleData', $user->roles);
         return $builder
             ->getToken(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()));
     }

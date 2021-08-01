@@ -27,6 +27,7 @@ Route::middleware('auth:api')->get('/token/revoke', function (Request $request) 
         ]);
     return response()->json('DONE');
 });
+Route::post('signup','UserController@store');
 
 //Route::group(['middleware' => ['auth:api']], function () {
 //    Route::resource('roles', 'RoleController');

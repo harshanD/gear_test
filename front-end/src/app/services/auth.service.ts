@@ -22,8 +22,6 @@ export class AuthService {
       headers: new HttpHeaders({Accept: 'application/json'})
         .set('Content-Type', 'application/json')
         .set('Access-Control-Allow-Origin', '*')
-        .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-        .set('Access-Control-Allow-Methods', 'GET, POST')
     };
   }
 
@@ -36,7 +34,7 @@ export class AuthService {
     return this.http.post(this.authUrl, {
       grant_type: 'password',
       client_id: '2',
-      client_secret: 'zm8fjOUNu65aQePXhcAxCNHe1l1Mxg2WxZM4ktX2',
+      client_secret: 'WV31yRuMeaLjUI44sMloysZQZc2zIzpept8xBPRL',
       username: e,
       password: p,
       scope: '',

@@ -19,8 +19,17 @@ use Illuminate\Http\Request;
 //    Route::resource('users', 'UserController');
 //}));
 
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::resource('roles', 'RoleController');
-    Route::resource('users', 'UserController');
-    Route::resource('products', 'ProductController');
+Route::middleware('auth:api')->get('/token/revoke', function (Request $request) {
+    DB::table('oauth_access_tokens')
+        ->where('user_id', $request->user()->id)
+        ->update([
+            'revoked' => true
+        ]);
+    return response()->json('DONE');
 });
+
+//Route::group(['middleware' => ['auth:api']], function () {
+//    Route::resource('roles', 'RoleController');
+//    Route::resource('users', 'UserController');
+//    Route::resource('products', 'ProductController');
+//});

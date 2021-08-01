@@ -45,7 +45,12 @@ export class AuthService {
    * Revoke the authenticated user token
    */
   logout() {
-    this.options.headers.Authorization = 'Bearer ' + localStorage.getItem('access_token');
+    this.options = {
+      headers: new HttpHeaders({Accept: 'application/json'})
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+    }
     return this.http.get(this.apiUrl + '/token/revoke', this.options);
   }
 }

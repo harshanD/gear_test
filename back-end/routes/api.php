@@ -46,12 +46,13 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
 
     Route::get('books-list', function (Request $request) {
+
         if ($request->user()->hasRole('Admin')) {
-            return response()->json(\App\Books::with('userzz')->get(), 200);
+            return response()->json(\App\Books::with('user')->get(), 200);
         } else {
             return response()->json(\App\Books::with('user')->where('author_id', $request->user()->id)->orderBy('books.name')->get(), 200);
         }
-//
+
     });
 
 //    Route::post('users-list', 'UserController@list');

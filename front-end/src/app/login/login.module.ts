@@ -4,6 +4,7 @@ import {LoginComponent} from './login.component';
 import {Routes, RouterModule} from '@angular/router';
 import {GuestGuardService} from '../services/guest-guard.service';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzAlertModule, NzButtonModule, NzGridModule, NzInputModule} from "ng-zorro-antd";
 
 const routes: Routes = [
   {
@@ -19,7 +20,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzGridModule,
+    NzInputModule,
+    NzButtonModule,
   ]
 })
 export class LoginModule {

@@ -22,8 +22,10 @@ class Books extends Model
     ];
 
 
-    public function userzz()
+    public function user()
     {
-        return $this->belongsTo('App\User', 'id', 'author_id')->withTrashed();
+        return $this->hasOne(User::class, 'id', 'author_id')->withDefault(function ($user, $book) {
+            $book->author = User::find($user['id'])['name'];
+        });
     }
 }

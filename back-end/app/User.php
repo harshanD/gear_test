@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status',
     ];
 
     /**
@@ -41,8 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function findForPassport($username)
+    {
+        return $this->where('email', $username)->where('status', 0)->first();
+    }
+
     public function books()
     {
-        return $this->hasMany('App\Books', 'id');
+        return $this->hasMany('App\Books', 'author_id');
     }
 }

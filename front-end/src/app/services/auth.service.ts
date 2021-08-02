@@ -75,6 +75,10 @@ export class AuthService {
     return localStorage.getItem('access_token') || null;
   }
 
+  logged() {
+    return !!localStorage.getItem('access_token')
+  }
+
   currentUserRole() {
     return this.roleList[0];
   }

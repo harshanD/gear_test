@@ -73,9 +73,16 @@ export class JwtHelperService {
   }
 
   /**
-   * Get authenticated user's role
+   * Get authenticated user's role data
    */
   rolesData(): string {
     return this.attr('roleData') as string;
+  }
+
+  /**
+   * Get authenticated user's user status
+   */
+  status(): string {
+    return this.attr('status') as string;
   }
 }

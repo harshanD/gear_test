@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
       id: jwtHelper.id(),
       name: jwtHelper.name(),
       email: jwtHelper.email(),
+      status: jwtHelper.status(),
       roleList: jwtHelper.roleList(),
       rolesData: jwtHelper.rolesData()
     };
@@ -43,5 +44,9 @@ export class HomeComponent implements OnInit {
         localStorage.removeItem('access_token');
         this.router.navigate(['/login']);
       });
+  }
+
+  roleForPermissionCheck(permission) {
+    return this.authService.privilegeCheck(permission);
   }
 }

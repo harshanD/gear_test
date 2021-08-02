@@ -28,6 +28,7 @@ class AccessToken extends PassportAccessToken
             ->withClaim('id', $user->id)
             ->withClaim('name', $user->name)
             ->withClaim('email', $user->email)
+            ->withClaim('status', $user->status == 0 ? 'active' : 'inactive')
             ->withClaim('rolesList', $user->getRoleNames())
             ->withClaim('roleData', $user->load('roles.permissions'));
 //        ->withClaim('roleData', $user->roles);

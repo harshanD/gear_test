@@ -8,11 +8,8 @@
             <p class="card-text">Fill the following form and click on the <strong>Signup{{controls.emails}}</strong></p>
             <div class="row" *ngIf="errors">
               <div class="col">
-                <div class="alert alert-danger">
-                  <p class="col-sm-offset-3 help-block error" ng-show="{{errors|json}}">please enter your email</p>
-                  <p class="col-sm-offset-3 help-block error" ng-show="form.$submitted && form.email.$error.email">
-                    please enter a valid email</p>
-                  <strong>Oops!</strong> You have entered invalid values
+                <div class="alert alert-danger" >
+                  <strong>Oops!</strong>
                 </div>
               </div>
             </div>

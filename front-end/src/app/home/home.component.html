@@ -1,22 +1,22 @@
 <div class="container">
   <div class="row pt-5 pb-5">
+    <!--    <div class="col-md-6">-->
+    <!--      <div class="card bg-light">-->
+    <!--        <div class="card-header">-->
+    <!--          <h6>JWT generated</h6>-->
+    <!--        </div>-->
+    <!--        <div class="card-body">-->
+    <!--          <pre>{{accessToken | json}}</pre>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="col-md-6">
       <div class="card bg-light">
         <div class="card-header">
-          <h6>JWT generated</h6>
+          <h6>User for Options</h6>
         </div>
         <div class="card-body">
-          <pre>{{accessToken | json}}</pre>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card bg-light">
-        <div class="card-header">
-          <h6>Authenticated user's details</h6>
-        </div>
-        <div class="card-body">
-          <pre>{{accessTokenDetails | json}}</pre>
+          <!--          <pre>{{accessTokenDetails | json}}</pre>-->
         </div>
       </div>
     </div>
@@ -26,4 +26,10 @@
       <button class="btn btn-danger" (click)="logout()" [disabled]="loading">Logout</button>
     </div>
   </div>
+
+  <br>
+  <br>
+  <br>
+  <user-list *ngIf="roleForPermissionCheck('role-list')"></user-list>
+  <books  *ngIf="roleForPermissionCheck('books-list')"></books>
 </div>
